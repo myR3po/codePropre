@@ -2,16 +2,22 @@ package ex1;
 
 import java.util.Date;
 
-public class entreprise {
+/**
+ * Cette classe represente un objet Entreprise
+ * 
+ * @author myR3po
+ *
+ */
+public class Entreprise {
 
-	public int Siret;
-	public String Nom;
+	public int siret;
+	public String nom;
 	public String adresse;
-	public Date date_Creation;
+	public Date dateCreation;
 	
-	public static final int capitalMax = 3000000;
+	public static final int CAPITAL_MAX = 3000000;
 	
-	public void Afficher_statut(){
+	public void afficherStatut(){
 		
 	}
 	
