@@ -1,30 +1,20 @@
 package ex3;
 
-import java.util.List;
-
-public class SavaneAfricaine {
-
-	private List<String> types;
-	private List<String> noms;
-	private List<String> comportements;
+public class SavaneAfricaine  extends AbstractZone{
 	
-	public void addAnimal(String typeAnimal, String nomAnimal, String comportement) {
-		types.add(typeAnimal);
-		noms.add(nomAnimal);
-		comportements.add(comportement);
+	public SavaneAfricaine() {
+		super();
 	}
-	
-	public void afficherListeAnimaux(){
-		for (String nom: noms){
-			System.out.println(nom);
+
+	public double calculerKgsNourritureParJour(){
+		return countAnimals() * 10;
+	}
+
+	@Override
+	public boolean acceptAnimal(Animal animal) {
+		if (animal.getType().equals(AnimalType.MAMMIFERE) && animal.getComportement().equals(AnimalBehavior.HERBIVORE)){
+			return true;
 		}
-	}
-	
-	public int compterAnimaux(){
-		return noms.size();
-	}
-	
-	public int calculerKgsNourritureParJour(){
-		return noms.size() * 10;
+		return false;
 	}
 }

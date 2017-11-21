@@ -1,50 +1,50 @@
 package ex3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Zoo {
 
-	private String nom;
-	private SavaneAfricaine savaneAfricaine;
-	private ZoneCarnivore zoneCarnivore;
-	private FermeReptile fermeReptile;
-	private Aquarium aquarium;
+	private String name;
+	List<AbstractZone> zones;
 	
-	public Zoo(String nom){
-		this.nom = nom;
+	public Zoo(String name){
+		this.name = name;
+		init();
 	}
 	
-	public void addAnimal(String nomAnimal, String typeAnimal, String comportement){
-		if (typeAnimal.equals("MAMMIFERE") && comportement.equals("CARNIVORE")){
-			zoneCarnivore.addAnimal(typeAnimal, nomAnimal, comportement);
-		}
-		else if (typeAnimal.equals("MAMMIFERE") && comportement.equals("HERBIVORE")){
-			savaneAfricaine.addAnimal(typeAnimal, nomAnimal, comportement);
-		}
-		else if (typeAnimal.equals("REPTILE")){
-			fermeReptile.addAnimal(typeAnimal, nomAnimal, comportement);
-		}
-		else if (typeAnimal.equals("POISSON")){
-			aquarium.addAnimal(typeAnimal, nomAnimal, comportement);
+	private void init() {
+		zones = new ArrayList<AbstractZone>();
+		zones.add(new SavaneAfricaine());
+		zones.add(new ZoneCarnivore());
+		zones.add(new FermeReptile());
+		zones.add(new Aquarium());
+	}
+	
+	public void addAnimal(Animal animal){
+		for(AbstractZone zone : zones) {
+			if (zone.acceptAnimal(animal)){
+				zone.addAnimal(animal);
+				return;
+			}
 		}
 	}
 	
-	public void afficherListeAnimaux(){
-		savaneAfricaine.afficherListeAnimaux();
-		zoneCarnivore.afficherListeAnimaux();
-		fermeReptile.afficherListeAnimaux();
-		aquarium.afficherListeAnimaux();
+	public void displayAllAnimals(){
+		zones.stream().forEach(AbstractZone::displayAllAnimals);
 	}
 
-	/** Getter for nom
-	 * @return the nom
+	/** Getter for name
+	 * @return the name
 	 */
-	public String getNom() {
-		return nom;
+	public String getName() {
+		return name;
 	}
 
 	/** Setter
-	 * @param nom the nom to set
+	 * @param name the name to set
 	 */
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setNom(String name) {
+		this.name = name;
 	}
 }
